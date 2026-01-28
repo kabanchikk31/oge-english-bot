@@ -31,5 +31,5 @@ async def process_answer(callback_query: types.CallbackQuery):
     pass
 
 
-if name == "__main__":
+if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
