@@ -21,8 +21,33 @@ async def start(message: types.Message):
 
 @dp.callback_query_handler(lambda c: c.data == "practice")
 async def practice(callback_query: types.CallbackQuery):
-    # логика выбора задания
-    pass
+    q = get_question()
+
+    if not q:
+        await callback_query.message.answer(
+            "❗ В базе пока нет заданий.\n"
+            "Добавь вопросы в базу данных."
+        )
+        await callback_query.answer()
+        return
+
+    q_id, text, a, b, c, d, correct = q
+
+    message_text = (
+        "📘 Задание ОГЭ\n\n"
+        f"{text}"
+    )
+
+    kb = InlineKeyboardMarkup(row_width=2)
+    kb.add(
+        InlineKeyboardButton(a, callback_data=f"answer_{q_id}_A"),
+        InlineKeyboardButton(b, callback_data=f"answer_{q_id}_B"),
+        InlineKeyboardButton(c, callback_data=f"answer_{q_id}_C"),
+        InlineKeyboardButton(d, callback_data=f"answer_{q_id}_D"),
+    )
+
+    await callback_query.message.answer(message_text, reply_markup=kb)
+    await callback_query.answer()
 
 
 @dp.callback_query_handler(lambda c: c.data.startswith("answer_"))
