@@ -4,7 +4,7 @@ import sqlite3
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-API_TOKEN = "ВСТАВЬ_СЮДА_СВОЙ_ТОКЕН"
+API_TOKEN = "8136156824:AAFNQLJRVg4vLmYwLF1bVzNVS_Ie0lnkhBI"
 
 logging.basicConfig(level=logging.INFO)
 
