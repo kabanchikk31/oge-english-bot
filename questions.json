@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "topic": "Grammar",
+    "question": "Choose the correct option: She ___ to school every day.",
+    "options": ["go", "goes", "going", "gone"],
+    "correct": "goes"
+  },
+  {
+    "id": 2,
+    "topic": "Grammar",
+    "question": "Choose the correct option: They ___ football now.",
+    "options": ["play", "plays", "are playing", "played"],
+    "correct": "are playing"
+  },
+  {
+    "id": 3,
+    "topic": "Grammar",
+    "question": "Choose the correct option: I ___ never been to London.",
+    "options": ["have", "has", "had", "am"],
+    "correct": "have"
+  },
+  {
+    "id": 4,
+    "topic": "Vocabulary",
+    "question": "Choose the correct translation: 'decide'",
+    "options": ["решать", "бежать", "забывать", "помогать"],
+    "correct": "решать"
+  },
+  {
+    "id": 5,
+    "topic": "Vocabulary",
+    "question": "Choose the correct translation: 'environment'",
+    "options": ["окружение", "развлечение", "образование", "здание"],
+    "correct": "окружение"
+  },
+  {
+    "id": 6,
+    "topic": "Vocabulary",
+    "question": "Choose the correct translation: 'borrow'",
+    "options": ["занимать", "давать", "покупать", "терять"],
+    "correct": "занимать"
+  },
+  {
+    "id": 7,
+    "topic": "Reading",
+    "question": "What is the main idea of the text?",
+    "options": ["Описание события", "Мнение автора", "Инструкция", "Реклама"],
+    "correct": "Мнение автора"
+  },
+  {
+    "id": 8,
+    "topic": "Grammar",
+    "question": "Choose the correct option: If it ___, we will stay at home.",
+    "options": ["rain", "rains", "rained", "will rain"],
+    "correct": "rains"
+  },
+  {
+    "id": 9,
+    "topic": "Grammar",
+    "question": "Choose the correct option: This task is ___ than the previous one.",
+    "options": ["easy", "easier", "easiest", "more easy"],
+    "correct": "easier"
+  },
+  {
+    "id": 10,
+    "topic": "Vocabulary",
+    "question": "Choose the correct translation: 'achievement'",
+    "options": ["достижение", "ошибка", "попытка", "возможность"],
+    "correct": "достижение"
+  },
+  {
+    "id": 11,
+    "topic": "Grammar",
+    "question": "Choose the correct option: He asked me where I ___ from.",
+    "options": ["am", "was", "were", "be"],
+    "correct": "was"
+  },
+  {
+    "id": 12,
+    "topic": "Vocabulary",
+    "question": "Choose the correct translation: 'improve'",
+    "options": ["улучшать", "начинать", "заканчивать", "портить"],
+    "correct": "улучшать"
+  },
+  {
+    "id": 13,
+    "topic": "Grammar",
+    "question": "Choose the correct option: There isn’t ___ milk left.",
+    "options": ["many", "much", "few", "a few"],
+    "correct": "much"
+  },
+  {
+    "id": 14,
+    "topic": "Vocabulary",
+    "question": "Choose the correct translation: 'responsible'",
+    "options": ["ответственный", "опасный", "ленивый", "слабый"],
+    "correct": "ответственный"
+  },
+  {
+    "id": 15,
+    "topic": "Grammar",
+    "question": "Choose the correct option: She speaks ___ than her sister.",
+    "options": ["confident", "more confident", "most confident", "confidence"],
+    "correct": "more confident"
+  }
+]
