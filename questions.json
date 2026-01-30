@@ -1,24 +1,183 @@
 [
   {
-    "type": "Грамматика",
-    "question": "Choose the correct option: She ___ already finished her homework.",
-    "options": [
-      "has",
-      "have",
-      "is",
-      "was"
-    ],
+    "type": "Grammar — Tenses",
+    "question": "Choose the correct option: She ___ to school every day.",
+    "options": ["go", "goes", "is going", "went"],
+    "correct": "goes"
+  },
+  {
+    "type": "Grammar — Tenses",
+    "question": "Choose the correct option: They ___ TV when I came home.",
+    "options": ["watch", "watched", "were watching", "are watching"],
+    "correct": "were watching"
+  },
+  {
+    "type": "Grammar — Tenses",
+    "question": "Choose the correct option: He ___ already done his homework.",
+    "options": ["have", "has", "is", "was"],
     "correct": "has"
   },
   {
-    "type": "Лексика",
-    "question": "Choose the correct word: I am very ___ in learning English.",
-    "options": [
-      "interested",
-      "interesting",
-      "interest",
-      "interests"
-    ],
+    "type": "Grammar — Tenses",
+    "question": "Choose the correct option: We ___ English since childhood.",
+    "options": ["learn", "learned", "have learned", "are learning"],
+    "correct": "have learned"
+  },
+  {
+    "type": "Grammar — Tenses",
+    "question": "Choose the correct option: I ___ you tomorrow.",
+    "options": ["see", "saw", "will see", "am seeing"],
+    "correct": "will see"
+  },
+  {
+    "type": "Grammar — Tenses",
+    "question": "Choose the correct option: She ___ dinner at the moment.",
+    "options": ["cooks", "cooked", "is cooking", "has cooked"],
+    "correct": "is cooking"
+  },
+  {
+    "type": "Grammar — Tenses",
+    "question": "Choose the correct option: They ___ in London last year.",
+    "options": ["live", "lived", "have lived", "are living"],
+    "correct": "lived"
+  },
+  {
+    "type": "Grammar — Tenses",
+    "question": "Choose the correct option: He ___ never been abroad.",
+    "options": ["has", "have", "is", "was"],
+    "correct": "has"
+  },
+  {
+    "type": "Grammar — Tenses",
+    "question": "Choose the correct option: We ___ a test tomorrow.",
+    "options": ["write", "wrote", "will write", "have written"],
+    "correct": "will write"
+  },
+  {
+    "type": "Grammar — Tenses",
+    "question": "Choose the correct option: She ___ her keys yesterday.",
+    "options": ["loses", "lost", "has lost", "is losing"],
+    "correct": "lost"
+  },
+
+  {
+    "type": "Grammar — Modal Verbs",
+    "question": "Choose the correct option: You ___ wear a uniform at school.",
+    "options": ["can", "must", "may", "could"],
+    "correct": "must"
+  },
+  {
+    "type": "Grammar — Modal Verbs",
+    "question": "Choose the correct option: He ___ swim when he was five.",
+    "options": ["can", "could", "must", "may"],
+    "correct": "could"
+  },
+  {
+    "type": "Grammar — Modal Verbs",
+    "question": "Choose the correct option: You ___ be quiet in the library.",
+    "options": ["can", "must", "may", "could"],
+    "correct": "must"
+  },
+  {
+    "type": "Grammar — Modal Verbs",
+    "question": "Choose the correct option: ___ I open the window?",
+    "options": ["Must", "May", "Should", "Have"],
+    "correct": "May"
+  },
+  {
+    "type": "Grammar — Modal Verbs",
+    "question": "Choose the correct option: You ___ smoke here.",
+    "options": ["mustn't", "may", "could", "should"],
+    "correct": "mustn't"
+  },
+  {
+    "type": "Grammar — Modal Verbs",
+    "question": "Choose the correct option: He ___ help you if you ask.",
+    "options": ["must", "can", "has", "should"],
+    "correct": "can"
+  },
+  {
+    "type": "Grammar — Modal Verbs",
+    "question": "Choose the correct option: You ___ do your homework now.",
+    "options": ["should", "could", "may", "can"],
+    "correct": "should"
+  },
+  {
+    "type": "Grammar — Modal Verbs",
+    "question": "Choose the correct option: She ___ be at home now.",
+    "options": ["must", "can", "may", "should"],
+    "correct": "may"
+  },
+  {
+    "type": "Grammar — Modal Verbs",
+    "question": "Choose the correct option: We ___ hurry or we'll be late.",
+    "options": ["can", "must", "may", "could"],
+    "correct": "must"
+  },
+  {
+    "type": "Grammar — Modal Verbs",
+    "question": "Choose the correct option: You ___ take my pen if you want.",
+    "options": ["must", "can", "should", "have"],
+    "correct": "can"
+  },
+
+  {
+    "type": "Vocabulary",
+    "question": "Choose the correct word: I am very ___ in learning English.","options": ["interested", "interesting", "interest", "interests"],
     "correct": "interested"
+  },
+  {
+    "type": "Vocabulary",
+    "question": "Choose the correct word: This exercise is too ___.",
+    "options": ["easy", "easily", "ease", "easier"],
+    "correct": "easy"
+  },
+  {
+    "type": "Vocabulary",
+    "question": "Choose the correct word: She made a ___ mistake.",
+    "options": ["big", "large", "strong", "hard"],
+    "correct": "big"
+  },
+  {
+    "type": "Vocabulary",
+    "question": "Choose the correct word: I usually ___ up at 7 a.m.",
+    "options": ["get", "wake", "stand", "rise"],
+    "correct": "get"
+  },
+  {
+    "type": "Vocabulary",
+    "question": "Choose the correct word: He is good ___ maths.",
+    "options": ["in", "at", "on", "with"],
+    "correct": "at"
+  },
+  {
+    "type": "Vocabulary",
+    "question": "Choose the correct word: We had a great ___ yesterday.",
+    "options": ["time", "times", "timing", "timed"],
+    "correct": "time"
+  },
+  {
+    "type": "Vocabulary",
+    "question": "Choose the correct word: She is afraid ___ dogs.",
+    "options": ["of", "from", "with", "at"],
+    "correct": "of"
+  },
+  {
+    "type": "Vocabulary",
+    "question": "Choose the correct word: I look ___ to meeting you.",
+    "options": ["forward", "up", "after", "for"],
+    "correct": "forward"
+  },
+  {
+    "type": "Vocabulary",
+    "question": "Choose the correct word: He decided ___ a doctor.",
+    "options": ["to become", "become", "becoming", "became"],
+    "correct": "to become"
+  },
+  {
+    "type": "Vocabulary",
+    "question": "Choose the correct word: She felt ___ after the exam.",
+    "options": ["tired", "tiring", "tire", "tires"],
+    "correct": "tired"
   }
 ]
