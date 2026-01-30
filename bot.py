@@ -1,7 +1,5 @@
 import logging
-import random
 import sqlite3
-
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -12,101 +10,139 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
-user_sessions = {}
+# Храним состояние пользователей
+user_state = {}
 
-
-def get_questions():
+# ---------- БАЗА ----------
+def get_question():
     conn = sqlite3.connect("questions.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT question, option_a, option_b, option_c, option_d, correct FROM questions")
-    rows = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT id, question, option_a, option_b, option_c, option_d, correct
+        FROM questions
+        ORDER BY RANDOM()
+        LIMIT 1
+    """)
+
+    q = cursor.fetchone()
     conn.close()
-    return rows
+    return q
 
+# ---------- КЛАВИАТУРЫ ----------
+def main_menu():
+    kb = InlineKeyboardMarkup()
+    kb.add(InlineKeyboardButton("📝 Практика", callback_data="practice"))
+    return kb
 
+def exit_menu():
+    kb = InlineKeyboardMarkup()
+    kb.add(InlineKeyboardButton("🏠 В главное меню", callback_data="menu"))
+    return kb
+
+# ---------- /start ----------
 @dp.message_handler(commands=["start"])
 async def start(message: types.Message):
-    kb = InlineKeyboardMarkup()
-    kb.add(
-        InlineKeyboardButton("📝 Практика", callback_data="practice"),
-        InlineKeyboardButton("📘 Теория", callback_data="theory")
+    user_state.pop(message.from_user.id, None)
+    await message.answer(
+        "👋 Привет! Я бот для подготовки к ОГЭ по английскому 🇬🇧",
+        reply_markup=main_menu()
     )
-    await message.answer("Привет! Я бот для подготовки к ОГЭ по английскому 🇬🇧\nВыбери режим:", reply_markup=kb)
 
-
-@dp.callback_query_handler(lambda c: c.data == "theory")
-async def theory(callback_query: types.CallbackQuery):
+# ---------- Главное меню ----------
+@dp.callback_query_handler(lambda c: c.data == "menu")
+async def menu(callback_query: types.CallbackQuery):
+    await callback_query.answer()
+    user_state.pop(callback_query.from_user.id, None)
     await callback_query.message.answer(
-        "📘 Теория\n\n"
-        "В этом разделе будут:\n"
-        "• времена английского языка\n"
-        "• основные грамматические правила\n"
-        "• лексика ОГЭ\n\n"
-        "Раздел в разработке 👷‍♂️"
+        "Главное меню:",
+        reply_markup=main_menu()
     )
 
-
+# ---------- Практика ----------
 @dp.callback_query_handler(lambda c: c.data == "practice")
 async def practice(callback_query: types.CallbackQuery):
-    questions = get_questions()
-    random.shuffle(questions)
+    await callback_query.answer()
 
-    user_sessions[callback_query.from_user.id] = {
-        "questions": questions,
-        "current": 0,
-        "score": 0
+    user_id = callback_query.from_user.id
+
+    # Если вопрос уже активен — не даём новый
+    if user_id in user_state:
+        await callback_query.message.answer(
+            "❗ Сначала ответь на текущий вопрос",
+            reply_markup=exit_menu()
+        )
+        return
+
+    q = get_question()
+    if not q:
+        await callback_query.message.answer("❌ В базе нет заданий")
+        return
+
+    q_id, text, a, b, c, d, correct = q
+
+    user_state[user_id] = {
+        "question_id": q_id,
+        "correct": correct
     }
 
-    await send_question(callback_query.message, callback_query.from_user.id)
-
-
-async def send_question(message, user_id):
-    session = user_sessions[user_id]
-    q = session["questions"][session["current"]]
-
-    question_text, a, b, c, d, correct = q
-
-    kb = InlineKeyboardMarkup()
+    kb = InlineKeyboardMarkup(row_width=2)
     kb.add(
-        InlineKeyboardButton(a, callback_data=f"answer|{a}"),
-        InlineKeyboardButton(b, callback_data=f"answer|{b}"),
-        InlineKeyboardButton(c, callback_data=f"answer|{c}"),
-        InlineKeyboardButton(d, callback_data=f"answer|{d}")
+        InlineKeyboardButton(a, callback_data=f"ans_A"),
+        InlineKeyboardButton(b, callback_data=f"ans_B"),
+        InlineKeyboardButton(c, callback_data=f"ans_C"),
+        InlineKeyboardButton(d, callback_data=f"ans_D"),
     )
+    kb.add(InlineKeyboardButton("🏠 В главное меню", callback_data="menu"))
 
-    await message.answer(
-        f"Вопрос {session['current'] + 1}/{len(session['questions'])}\n\n{question_text}",
+    await callback_query.message.answer(
+        f"📘 Задание ОГЭ:\n\n{text}",
         reply_markup=kb
     )
 
+# ---------- Ответ ----------
+@dp.callback_query_handler(lambda c: c.data.startswith("ans_"))
+async def answer(callback_query: types.CallbackQuery):
+    await callback_query.answer()
 
-@dp.callback_query_handler(lambda c: c.data.startswith("answer|"))
-async def process_answer(callback_query: types.CallbackQuery):
     user_id = callback_query.from_user.id
-    session = user_sessions[user_id]
 
-    chosen = callback_query.data.split("|")[1]
-    correct = session["questions"][session["current"]][5]
+    if user_id not in user_state:
+        await callback_query.message.answer(
+            "❗ Этот вопрос уже неактивен",
+            reply_markup=main_menu()
+        )
+        return
 
-    if chosen == correct:
-        session["score"] += 1
-        await callback_query.message.answer("✅ Верно!")
+    chosen = callback_query.data.split("_")[1]
+
+    conn = sqlite3.connect("questions.db")
+    cursor = conn.cursor()
+
+    q_id = user_state[user_id]["question_id"]
+    correct_letter = user_state[user_id]["correct"]
+
+    cursor.execute(f"""
+        SELECT option_{correct_letter.lower()}
+        FROM questions
+        WHERE id = ?
+    """, (q_id,))
+    correct_text = cursor.fetchone()[0]
+
+    conn.close()
+    user_state.pop(user_id)
+
+    if chosen == correct_letter:
+        await callback_query.message.answer(
+            "✅ Верно!",
+            reply_markup=main_menu()
+        )
     else:
         await callback_query.message.answer(
-            f"❌ Неверно.\nПравильный ответ: **{correct}**",
-            parse_mode="Markdown"
+            f"❌ Неверно.\nПравильный ответ:\n👉 {correct_text}",
+            reply_markup=main_menu()
         )
 
-    session["current"] += 1
-
-    if session["current"] < len(session["questions"]):
-        await send_question(callback_query.message, user_id)
-    else:
-        await callback_query.message.answer(
-            f"🏁 Практика окончена!\n"
-            f"Твой результат: {session['score']} из {len(session['questions'])}"
-        )
-
-
-if __name__ == "__main__":
+# ---------- Запуск ----------
+if name == "__main__":
     executor.start_polling(dp, skip_updates=True)
